@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090b12">
+  <title>SUARA — Full Music</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="intro-screen" id="introScreen" aria-label="Memuat SUARA" role="status">
+  <div class="intro-orbit intro-orbit-one"></div><div class="intro-orbit intro-orbit-two"></div>
+  <div class="intro-content">
+    <div class="intro-vinyl"><div class="intro-grooves"></div><div class="intro-label">♫</div></div>
+    <div class="intro-brand">SUARA<span>.</span></div>
+    <div class="intro-tagline">YOUR MUSIC SPACE</div>
+    <div class="intro-equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="intro-loading">MENYIAPKAN PENGALAMAN MUSIK</div>
+    <div class="intro-actions"><button class="intro-sound" id="introSound" type="button" aria-pressed="false">♫ Aktifkan suara</button><button class="intro-skip" id="introSkip" type="button">Lewati intro <span>→</span></button></div>
+  </div>
+</div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-mark">S</span><span>SUARA</span></a>
+    <div class="side-label">MENU</div>
+    <button class="nav-item active" data-view="discover"><span>⌕</span> Temukan musik</button>
+    <button class="nav-item" data-view="library"><span>▤</span> Koleksi saya</button>
+    <button class="nav-item" data-view="liked"><span>♥</span> Lagu disukai</button>
+    <div class="side-label playlist-label">PLAYLIST</div>
+    <button class="nav-item" id="newPlaylist"><span>＋</span> Buat playlist</button>
+    <div id="playlistNav" class="playlist-nav"></div>
+    <div class="sidebar-note"><span class="pulse"></span><div><b>Musik milikmu.</b><small>Putar koleksi legal dan file pribadi.</small></div></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="mobile-brand"><span class="brand-mark">S</span> SUARA</div>
+      <div class="top-actions"><span class="status-dot"></span><span>POWERED BY m.aryaputra_</span></div>
+    </header>
+    <nav class="mobile-nav" aria-label="Navigasi utama">
+      <button class="mobile-nav-item active" data-view="discover"><span>⌕</span> Jelajah</button>
+      <button class="mobile-nav-item" data-view="library"><span>▤</span> Koleksi</button>
+      <button class="mobile-nav-item" data-view="liked"><span>♥</span> Disukai</button>
+    </nav>
+
+    <section id="discoverView" class="view">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> YOUR MUSIC SPACE</div>
+          <h1>Temukan musik.<br><em>Nikmati sepenuhnya.</em></h1>
+          <p>Cari musik dari katalog Audius atau putar koleksi MP3 milikmu sendiri.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-glow"></div><div class="art-ring ring-one"></div><div class="art-ring ring-two"></div>
+          <div class="art-ring ring-three"></div>
+          <div class="art-disc"><div class="vinyl-grooves"></div><span class="disc-label">♫<small>SUARA</small></span></div>
+          <div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div>
+          <div class="sound-wave"><i style="--bar:15px;--delay:0.00s"></i><i style="--bar:29px;--delay:0.09s"></i><i style="--bar:21px;--delay:0.18s"></i><i style="--bar:42px;--delay:0.27s"></i><i style="--bar:25px;--delay:0.36s"></i><i style="--bar:50px;--delay:0.45s"></i><i style="--bar:31px;--delay:0.54s"></i><i style="--bar:19px;--delay:0.63s"></i><i style="--bar:37px;--delay:0.72s"></i><i style="--bar:24px;--delay:0.81s"></i><i style="--bar:46px;--delay:0.90s"></i><i style="--bar:18px;--delay:0.99s"></i><i style="--bar:33px;--delay:1.08s"></i><i style="--bar:14px;--delay:1.17s"></i></div>
+          <div class="floating-note note-a">♪</div><div class="floating-note note-b">♫</div>
+        </div>
+      </div>
+
+      <div class="search-panel">
+        <div class="search-heading"><div><span class="eyebrow">MUSIC EXPLORER</span><h2>Cari lagu favoritmu</h2></div><span class="search-hint">Katalog Audius</span></div>
+        <form id="searchForm" class="search-row">
+          <span class="search-icon">⌕</span>
+          <input id="searchInput" type="search" placeholder="Cari judul lagu, artis, atau kata kunci..." required>
+          <button class="primary-btn" type="submit">Cari musik <span>→</span></button>
+        </form>
+        <div class="api-row">
+          <small class="public-api-note">Sumber musik: Audius API. Pencarian dan streaming mengikuti ketersediaan katalog, ketentuan Audius, dan izin kreator. Untuk penggunaan ulang atau unduhan, periksa hak penggunaan setiap lagu.</small>
+        </div>
+      </div>
+
+      <div class="section-head"><div><span class="eyebrow">SEARCH RESULTS</span><h2 id="resultsTitle">Mulai pencarian musik</h2></div><span id="resultCount" class="muted"></span></div>
+      <div id="results" class="track-grid empty-state"><div class="empty-icon">♫</div><b>Musik menunggu ditemukan</b><p>Ketik judul lagu atau nama artis di kolom pencarian.</p></div>
+    </section>
+
+    <section id="libraryView" class="view hidden">
+      <div class="page-heading"><span class="eyebrow">YOUR COLLECTION</span><h1>Koleksi <em>musikmu.</em></h1><p>File audio yang kamu tambahkan dari perangkat ini.</p></div>
+      <div class="upload-card"><div class="upload-icon">＋</div><div><b>Tambahkan musik dari perangkat</b><p>Pilih MP3, M4A, WAV, FLAC, atau format audio lain yang didukung browser.</p></div><label class="secondary-btn" for="fileInput">Pilih file</label><input id="fileInput" type="file" accept="audio/*" multiple hidden></div>
+      <div class="section-head"><div><span class="eyebrow">LOCAL FILES</span><h2>File lokal</h2></div><span id="localCount" class="muted">0 lagu</span></div>
+      <div id="localList" class="list-results empty-state"><p>Belum ada file audio. Tambahkan lagu dari perangkatmu.</p></div>
+    </section>
+
+    <section id="likedView" class="view hidden">
+      <div class="page-heading"><span class="eyebrow">FAVORITES</span><h1>Lagu <em>disukai.</em></h1><p>Semua lagu yang kamu tandai dengan hati.</p></div>
+      <div id="likedList" class="list-results empty-state"><p>Belum ada lagu yang disukai.</p></div>
+    </section>
+
+    <section id="playlistView" class="view hidden">
+      <div class="page-heading"><span class="eyebrow">PLAYLIST</span><h1 id="playlistTitle">Playlist</h1><p id="playlistDescription">Kumpulan lagu pilihanmu.</p></div>
+      <div id="playlistTracks" class="list-results empty-state"><p>Playlist ini masih kosong.</p></div>
+    </section>
+
+    <footer>SUARA <span>•</span> Dengarkan musik dengan cara yang legal dan aman.</footer>
+  </main>
+</div>
+
+<div class="player">
+  <div class="now-playing"><div id="playerCover" class="cover-placeholder">♫</div><div class="now-text"><b id="nowTitle">Belum ada lagu diputar</b><small id="nowArtist">Pilih musik untuk memulai</small></div><button id="playerLike" class="icon-btn" title="Sukai lagu">♡</button></div>
+  <div class="player-center"><div class="player-controls"><button id="prevBtn" class="control-btn" title="Sebelumnya">↶</button><button id="playBtn" class="play-btn" title="Putar">▶</button><button id="nextBtn" class="control-btn" title="Berikutnya">↷</button></div><div class="progress-row"><span id="currentTime">0:00</span><input id="seekBar" type="range" min="0" max="100" value="0"><span id="duration">0:00</span></div></div>
+  <div class="player-extra"><span>♫</span><input id="volumeBar" type="range" min="0" max="1" step="0.01" value="0.85"></div>
+  <audio id="audio" preload="metadata"></audio>
+</div>
+<div id="toast" class="toast"></div>
+<dialog id="playlistDialog"><form method="dialog" id="playlistForm"><div class="dialog-top"><h3>Buat playlist</h3><button class="icon-btn" value="cancel">×</button></div><label>Nama playlist</label><input id="playlistName" maxlength="40" placeholder="Misalnya: Teman perjalanan" required><div class="dialog-actions"><button class="secondary-btn" value="cancel">Batal</button><button class="primary-btn" value="default">Buat playlist</button></div></form></dialog>
+<script>
+(() => {
+  const screen = document.getElementById('introScreen');
+  const skip = document.getElementById('introSkip');
+  const soundButton = document.getElementById('introSound');
+  if (!screen) return;
+  let closed = false, audioContext = null, soundNodes = [], soundOn = false;
+
+  // Original synthesized SUARA sonic logo; no external/copyrighted recording.
+  const stopSonicLogo = () => {
+    soundOn = false;
+    soundButton?.setAttribute('aria-pressed', 'false');
+    if (soundButton) soundButton.textContent = '♫ Aktifkan suara';
+    const now = audioContext?.currentTime || 0;
+    soundNodes.forEach(node => {
+      try {
+        if (node.gain?.gain) {
+          node.gain.gain.cancelScheduledValues(now);
+          node.gain.gain.setTargetAtTime(0, now, 0.06);
+        }
+        if (node.stop) node.stop(now + 0.25);
+      } catch (_) {}
+    });
+    soundNodes = [];
+  };
+
+  const playSonicLogo = async () => {
+    if (soundOn) { stopSonicLogo(); return; }
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) {
+      if (soundButton) soundButton.textContent = 'Audio tidak didukung';
+      return;
+    }
+    try {
+      audioContext = audioContext || new AudioCtx();
+      if (audioContext.state === 'suspended') await audioContext.resume();
+      soundOn = true;
+      soundButton?.setAttribute('aria-pressed', 'true');
+      if (soundButton) soundButton.textContent = '♫ Matikan suara';
+      const ctx = audioContext, t = ctx.currentTime;
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.0001, t);
+      master.gain.exponentialRampToValueAtTime(0.19, t + 0.35);
+      master.gain.setValueAtTime(0.19, t + 2.15);
+      master.gain.exponentialRampToValueAtTime(0.0001, t + 3.15);
+      master.connect(ctx.destination);
+      soundNodes.push(master);
+      // Warm ambient chord, soft bass pulse and a short sparkling arpeggio.
+      const notes = [110, 164.81, 220, 329.63];
+      notes.forEach((freq, index) => {
+        const osc = ctx.createOscillator(), gain = ctx.createGain(), filter = ctx.createBiquadFilter();
+        osc.type = index === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, t);
+        filter.type = 'lowpass'; filter.frequency.value = 950;
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.linearRampToValueAtTime(index === 0 ? 0.22 : 0.075, t + 0.45 + index * 0.08);
+        gain.gain.setTargetAtTime(0.0001, t + 2.55, 0.18);
+        osc.connect(filter); filter.connect(gain); gain.connect(master);
+        osc.start(t); osc.stop(t + 3.2);
+        soundNodes.push({stop: when => osc.stop(when), gain});
+      });
+      [440, 554.37, 659.25, 880].forEach((freq, i) => {
+        const osc = ctx.createOscillator(), gain = ctx.createGain();
+        osc.type = 'sine'; osc.frequency.value = freq;
+        const at = t + 0.45 + i * 0.34;
+        gain.gain.setValueAtTime(0.0001, at);
+        gain.gain.linearRampToValueAtTime(0.045, at + 0.035);
+        gain.gain.exponentialRampToValueAtTime(0.0001, at + 0.42);
+        osc.connect(gain); gain.connect(master); osc.start(at); osc.stop(at + 0.45);
+        soundNodes.push({stop: when => osc.stop(when), gain});
+      });
+      window.setTimeout(() => { if (soundOn) stopSonicLogo(); }, 3300);
+    } catch (_) {
+      stopSonicLogo();
+      if (soundButton) soundButton.textContent = 'Coba aktifkan lagi';
+    }
+  };
+
+  soundButton?.addEventListener('click', playSonicLogo);
+  let timer;
+  const closeIntro = () => {
+    if (closed) return;
+    closed = true;
+    window.clearTimeout(timer);
+    stopSonicLogo();
+    screen.classList.add('intro-hidden');
+    window.setTimeout(() => screen.remove(), 850);
+  };
+  timer = window.setTimeout(closeIntro, 3800);
+  skip?.addEventListener('click', closeIntro);
+  window.addEventListener('pageshow', (event) => { if (event.persisted) closeIntro(); }, { once: true });
+})();
+</script>
+<script src="app.js"></script>
+</body>
+</html>
